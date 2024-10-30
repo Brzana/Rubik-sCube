@@ -2,5 +2,7 @@
 
 int main()
 {
-	Core::PrintHelloWorld();
+	Core::Cube cube;
+	cube.PrintCube(cube.state); 
+	return 0;
 }

@@ -1,20 +1,21 @@
 #pragma once
 #include <vector>
+#include <unordered_map>
 
 namespace Core {
 
-	void PrintHelloWorld();
+	enum colors {w, g, r, b, o, y};
 
-	enum colors {W, G, R, B, O, Y};
+	enum move { U, Uprim, U2, R, Rprim, R2, L, Lprim, L2, F, Fprim, F2, B, Bprim, B2, D, Dprim, D2, M, Mprim, M2, /*rotacje*/ X, Xprim, X2, Y, Yprim, Y2, Z, Zprim, Z2, none };
 
-	enum move { U, Uprim, U2, R, Rprim, R2, L, Lprim, L2, F, Fprim, F2, B, Bprim, B2, D, Dprim, D2, M, Mprim, M2, /*rotacje*/ x, xprim, x2, y, yprim, y2, z, zprim, z2, none };
+	enum side { TOP, FRONT, RIGHT, BACK, LEFT, DOWN };
 
 	class Cube {
 	public:
 		Cube();
-		std::vector<int> state;
-		void PrintCube(const std::vector<int>& state);
-		std::vector<int> MakeMove(int move, const std::vector<int>& state);
+		int state[6][3][3];
+		void PrintCube(const int(&state)[6][3][3]);
+		void MakeMove(int move, const int(&state)[6][3][3]);
 		bool CheckSolved();
 		int GetMove();
 		std::vector<int> ParseScramble();
