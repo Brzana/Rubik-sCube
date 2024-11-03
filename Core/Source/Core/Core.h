@@ -8,14 +8,20 @@ namespace Core {
 
 	enum move { U, Uprim, U2, R, Rprim, R2, L, Lprim, L2, F, Fprim, F2, B, Bprim, B2, D, Dprim, D2, M, Mprim, M2, /*rotacje*/ X, Xprim, X2, Y, Yprim, Y2, Z, Zprim, Z2, none };
 
-	enum side { TOP, FRONT, RIGHT, BACK, LEFT, DOWN };
+	enum side { TOP, LEFT, FRONT, RIGHT, BACK, DOWN };
+
+	void shift4(int& a, int& b, int& c, int& d);
+
+	void shift4prim(int& a, int& b, int& c, int& d);
+
+	void shift4double(int& a, int& b, int& c, int& d);
 
 	class Cube {
 	public:
 		Cube();
 		int state[6][3][3];
 		void PrintCube(const int(&state)[6][3][3]);
-		void MakeMove(int move, const int(&state)[6][3][3]);
+		void MakeMove(int move, int(&state)[6][3][3]);
 		bool CheckSolved();
 		int GetMove();
 		std::vector<int> ParseScramble();

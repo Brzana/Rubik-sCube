@@ -49,8 +49,52 @@ namespace Core {
 		}
 	}
 
-	void Cube::MakeMove(int move, const int(&state)[6][3][3]) {
+	void shift4(int& a, int& b, int& c, int& d) {
+		int temp = d;
+		d = c;
+		c = b;
+		b = a;
+		a = temp;
+	}
 
+	void shift4prim(int& a, int& b, int& c, int& d) {
+		int temp = a;
+		a = b;
+		b = c;
+		c = d;
+		d = temp;
+	}
+
+	void Cube::MakeMove(int move, int(&state)[6][3][3]) {
+		switch (move) {
+		case U:
+		{
+			shift4(state[TOP][0][1], state[TOP][1][2], state[TOP][1][0], state[TOP][2][1]);
+			shift4(state[BACK][0][1], state[RIGHT][0][1], state[FRONT][0][1], state[LEFT][0][1]);
+			shift4(state[TOP][0][0], state[TOP][0][2], state[TOP][2][2], state[TOP][2][0]);
+			shift4(state[BACK][0][2], state[RIGHT][0][2], state[FRONT][0][2], state[LEFT][0][2]);
+			shift4(state[LEFT][0][0], state[BACK][0][0], state[RIGHT][0][0], state[FRONT][0][0]);
+			break;
+		}
+		case Uprim:
+		{
+			shift4prim(state[TOP][0][1], state[TOP][1][2], state[TOP][1][0], state[TOP][2][1]);
+			shift4prim(state[BACK][0][1], state[RIGHT][0][1], state[FRONT][0][1], state[LEFT][0][1]);
+			shift4prim(state[TOP][0][0], state[TOP][0][2], state[TOP][2][2], state[TOP][2][0]);
+			shift4prim(state[BACK][0][2], state[RIGHT][0][2], state[FRONT][0][2], state[LEFT][0][2]);
+			shift4prim(state[LEFT][0][0], state[BACK][0][0], state[RIGHT][0][0], state[FRONT][0][0]);
+			break;
+		}
+		case U2:
+			for (int i = 0; i < 2; i++) {
+				shift4(state[TOP][0][1], state[TOP][1][2], state[TOP][1][0], state[TOP][2][1]);
+				shift4(state[BACK][0][1], state[RIGHT][0][1], state[FRONT][0][1], state[LEFT][0][1]);
+				shift4(state[TOP][0][0], state[TOP][0][2], state[TOP][2][2], state[TOP][2][0]);
+				shift4(state[BACK][0][2], state[RIGHT][0][2], state[FRONT][0][2], state[LEFT][0][2]);
+				shift4(state[LEFT][0][0], state[BACK][0][0], state[RIGHT][0][0], state[FRONT][0][0]);
+			}
+			break;
+		}
 	}
 
 }
