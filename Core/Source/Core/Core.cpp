@@ -69,7 +69,7 @@ namespace Core {
 		switch (move) {
 		case U:
 		{
-			shift4(state[TOP][0][1], state[TOP][1][2], state[TOP][1][0], state[TOP][2][1]);
+			shift4(state[TOP][0][1], state[TOP][1][2], state[TOP][2][1], state[TOP][1][0]);
 			shift4(state[BACK][0][1], state[RIGHT][0][1], state[FRONT][0][1], state[LEFT][0][1]);
 			shift4(state[TOP][0][0], state[TOP][0][2], state[TOP][2][2], state[TOP][2][0]);
 			shift4(state[BACK][0][2], state[RIGHT][0][2], state[FRONT][0][2], state[LEFT][0][2]);
@@ -94,6 +94,53 @@ namespace Core {
 				shift4(state[LEFT][0][0], state[BACK][0][0], state[RIGHT][0][0], state[FRONT][0][0]);
 			}
 			break;
+		case R:
+			shift4(state[TOP][1][2], state[BACK][1][0], state[DOWN][1][2], state[FRONT][1][2]);
+			shift4(state[RIGHT][0][1], state[RIGHT][1][2], state[RIGHT][2][1], state[RIGHT][1][0]);
+			shift4(state[TOP][2][2], state[BACK][0][0], state[DOWN][2][2], state[FRONT][2][2]);
+			shift4(state[FRONT][0][2], state[TOP][0][2], state[BACK][2][0], state[DOWN][0][2]);
+			shift4(state[RIGHT][0][0], state[RIGHT][0][2], state[RIGHT][2][2], state[RIGHT][2][0]);
+			break;
+		case Rprim:
+			shift4prim(state[TOP][1][2], state[BACK][1][0], state[DOWN][1][2], state[FRONT][1][2]);
+			shift4prim(state[RIGHT][0][1], state[RIGHT][1][2], state[RIGHT][2][1], state[RIGHT][1][0]);
+			shift4prim(state[TOP][2][2], state[BACK][0][0], state[DOWN][2][2], state[FRONT][2][2]);
+			shift4prim(state[FRONT][0][2], state[TOP][0][2], state[BACK][2][0], state[DOWN][0][2]);
+			shift4prim(state[RIGHT][0][0], state[RIGHT][0][2], state[RIGHT][2][2], state[RIGHT][2][0]);
+			break;
+		case R2:
+			for (int i = 0; i < 2; i++) {
+				shift4(state[TOP][1][2], state[BACK][1][0], state[DOWN][1][2], state[FRONT][1][2]);
+				shift4(state[RIGHT][0][1], state[RIGHT][1][2], state[RIGHT][2][1], state[RIGHT][1][0]);
+				shift4(state[TOP][2][2], state[BACK][0][0], state[DOWN][2][2], state[FRONT][2][2]);
+				shift4(state[FRONT][0][2], state[TOP][0][2], state[BACK][2][0], state[DOWN][0][2]);
+				shift4(state[RIGHT][0][0], state[RIGHT][0][2], state[RIGHT][2][2], state[RIGHT][2][0]);
+			}
+			break;
+		case L:
+			shift4(state[TOP][1][0], state[FRONT][1][0], state[DOWN][1][0], state[BACK][1][2]);
+			shift4(state[LEFT][0][1], state[LEFT][1][2], state[LEFT][2][1], state[LEFT][1][0]);
+			shift4(state[TOP][0][0], state[FRONT][0][0], state[DOWN][0][0], state[BACK][2][2]);
+			shift4(state[BACK][0][2], state[TOP][2][0], state[FRONT][2][0], state[DOWN][2][0]);
+			shift4(state[LEFT][0][0], state[LEFT][0][2], state[LEFT][2][2], state[LEFT][0][2]);
+			break;
+		case Lprim:
+			shift4prim(state[TOP][1][0], state[FRONT][1][0], state[DOWN][1][0], state[BACK][1][2]);
+			shift4prim(state[LEFT][0][1], state[LEFT][1][2], state[LEFT][2][1], state[LEFT][1][0]);
+			shift4prim(state[TOP][0][0], state[FRONT][0][0], state[DOWN][0][0], state[BACK][2][2]);
+			shift4prim(state[BACK][0][2], state[TOP][2][0], state[FRONT][2][0], state[DOWN][2][0]);
+			shift4prim(state[LEFT][0][0], state[LEFT][0][2], state[LEFT][2][2], state[LEFT][0][2]);
+			break;
+		case L2:
+			for (int i = 0; i < 2; i++) {
+				shift4(state[TOP][1][0], state[FRONT][1][0], state[DOWN][1][0], state[BACK][1][2]);
+				shift4(state[LEFT][0][1], state[LEFT][1][2], state[LEFT][2][1], state[LEFT][1][0]);
+				shift4(state[TOP][0][0], state[FRONT][0][0], state[DOWN][0][0], state[BACK][2][2]);
+				shift4(state[BACK][0][2], state[TOP][2][0], state[FRONT][2][0], state[DOWN][2][0]);
+				shift4(state[LEFT][0][0], state[LEFT][0][2], state[LEFT][2][2], state[LEFT][0][2]);
+			}
+			break;
+		case F:
 		}
 	}
 
