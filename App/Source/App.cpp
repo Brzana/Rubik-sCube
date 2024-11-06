@@ -6,10 +6,10 @@ int main()
 	Core::Cube cube;
 	cube.PrintCube(cube.state); 
 	std::cout << "\n\n";
-	cube.MakeMove( 6, cube.state);
+	cube.MakeMove( 21, cube.state);
 	cube.PrintCube(cube.state);
 	std::cout << "\n\n";
-	cube.MakeMove(0, cube.state);
+	cube.MakeMove(3, cube.state);
 	cube.PrintCube(cube.state);
 	std::cout << "\n\n";
 	cube.MakeMove(4, cube.state);

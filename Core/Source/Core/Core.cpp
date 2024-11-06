@@ -141,6 +141,130 @@ namespace Core {
 			}
 			break;
 		case F:
+			shift4(state[TOP][2][1], state[RIGHT][1][0], state[DOWN][0][1], state[LEFT][1][2]);
+			shift4(state[FRONT][0][1], state[FRONT][1][2], state[FRONT][2][1], state[FRONT][1][0]);
+			shift4(state[TOP][2][0], state[RIGHT][0][0], state[DOWN][0][2], state[LEFT][2][2]);
+			shift4(state[LEFT][0][2], state[TOP][2][2], state[RIGHT][2][0], state[DOWN][0][0]);
+			shift4(state[FRONT][0][0], state[FRONT][0][2], state[FRONT][2][2], state[FRONT][2][0]);
+			break;
+		case Fprim:
+			shift4prim(state[TOP][2][1], state[RIGHT][1][0], state[DOWN][0][1], state[LEFT][1][2]);
+			shift4prim(state[FRONT][0][1], state[FRONT][1][2], state[FRONT][2][1], state[FRONT][1][0]);
+			shift4prim(state[TOP][2][0], state[RIGHT][0][0], state[DOWN][0][2], state[LEFT][2][2]);
+			shift4prim(state[LEFT][0][2], state[TOP][2][2], state[RIGHT][2][0], state[DOWN][0][0]);
+			shift4prim(state[FRONT][0][0], state[FRONT][0][2], state[FRONT][2][2], state[FRONT][2][0]);
+			break;
+		case F2:
+			for (int i = 0; i < 2; i++) {
+				shift4(state[TOP][2][1], state[RIGHT][1][0], state[DOWN][0][1], state[LEFT][1][2]);
+				shift4(state[FRONT][0][1], state[FRONT][1][2], state[FRONT][2][1], state[FRONT][1][0]);
+				shift4(state[TOP][2][0], state[RIGHT][0][0], state[DOWN][0][2], state[LEFT][2][2]);
+				shift4(state[LEFT][0][2], state[TOP][2][2], state[RIGHT][2][0], state[DOWN][0][0]);
+				shift4(state[FRONT][0][0], state[FRONT][0][2], state[FRONT][2][2], state[FRONT][2][0]);
+				
+			}
+			break;
+		case B:
+			shift4(state[TOP][0][1], state[LEFT][1][0], state[DOWN][2][1], state[RIGHT][1][2]);
+			shift4(state[BACK][0][1], state[BACK][1][2], state[BACK][2][1], state[BACK][1][0]);
+			shift4(state[TOP][0][0], state[LEFT][2][0], state[DOWN][2][2], state[RIGHT][0][2]);
+			shift4(state[LEFT][0][0], state[DOWN][2][0], state[RIGHT][2][2], state[TOP][0][2]);
+			shift4(state[BACK][0][2], state[BACK][2][2], state[BACK][2][0], state[BACK][0][0]);
+			break;
+		case Bprim:
+			shift4prim(state[TOP][0][1], state[LEFT][1][0], state[DOWN][2][1], state[RIGHT][1][2]);
+			shift4prim(state[BACK][0][1], state[BACK][1][2], state[BACK][2][1], state[BACK][1][0]);
+			shift4prim(state[TOP][0][0], state[LEFT][2][0], state[DOWN][2][2], state[RIGHT][0][2]);
+			shift4prim(state[LEFT][0][0], state[DOWN][2][0], state[RIGHT][2][2], state[TOP][0][2]);
+			shift4prim(state[BACK][0][2], state[BACK][2][2], state[BACK][2][0], state[BACK][0][0]);
+			break;
+		case B2:
+			for (int i = 0; i < 2; i++) {
+				shift4(state[TOP][0][1], state[LEFT][1][0], state[DOWN][2][1], state[RIGHT][1][2]);
+				shift4(state[BACK][0][1], state[BACK][1][2], state[BACK][2][1], state[BACK][1][0]);
+				shift4(state[TOP][0][0], state[LEFT][2][0], state[DOWN][2][2], state[RIGHT][0][2]);
+				shift4(state[LEFT][0][0], state[DOWN][2][0], state[RIGHT][2][2], state[TOP][0][2]);
+				shift4(state[BACK][0][2], state[BACK][2][2], state[BACK][2][0], state[BACK][0][0]);
+			}
+			break;
+		case D:
+			shift4(state[DOWN][0][1], state[DOWN][1][2], state[DOWN][2][1], state[DOWN][1][0]);
+			shift4(state[FRONT][2][1], state[RIGHT][2][1], state[BACK][2][1], state[LEFT][2][1]);
+			shift4(state[FRONT][2][0], state[RIGHT][2][0], state[BACK][2][0], state[LEFT][2][0]);
+			shift4(state[LEFT][2][2], state[FRONT][2][2], state[RIGHT][2][2], state[BACK][2][2]);
+			shift4(state[DOWN][0][0], state[DOWN][0][2], state[DOWN][2][2], state[DOWN][2][0]);
+			break;
+		case Dprim:
+			shift4prim(state[DOWN][0][1], state[DOWN][1][2], state[DOWN][2][1], state[DOWN][1][0]);
+			shift4prim(state[FRONT][2][1], state[RIGHT][2][1], state[BACK][2][1], state[LEFT][2][1]);
+			shift4prim(state[FRONT][2][0], state[RIGHT][2][0], state[BACK][2][0], state[LEFT][2][0]);
+			shift4prim(state[LEFT][2][2], state[FRONT][2][2], state[RIGHT][2][2], state[BACK][2][2]);
+			shift4prim(state[DOWN][0][0], state[DOWN][0][2], state[DOWN][2][2], state[DOWN][2][0]);
+			break;
+		case D2:
+			for (int i = 0; i < 2; i++) {
+				shift4(state[DOWN][0][1], state[DOWN][1][2], state[DOWN][2][1], state[DOWN][1][0]);
+				shift4(state[FRONT][2][1], state[RIGHT][2][1], state[BACK][2][1], state[LEFT][2][1]);
+				shift4(state[FRONT][2][0], state[RIGHT][2][0], state[BACK][2][0], state[LEFT][2][0]);
+				shift4(state[LEFT][2][2], state[FRONT][2][2], state[RIGHT][2][2], state[BACK][2][2]);
+				shift4(state[DOWN][0][0], state[DOWN][0][2], state[DOWN][2][2], state[DOWN][2][0]);
+			}
+			break;
+		case M:
+			shift4(state[TOP][2][1], state[BACK][0][1], state[DOWN][2][1], state[FRONT][2][1]);
+			shift4(state[FRONT][0][1], state[TOP][0][1], state[BACK][2][1], state[DOWN][0][1]);
+			shift4(state[TOP][1][1], state[BACK][1][1], state[DOWN][1][1], state[FRONT][1][1]);
+			break;
+		case Mprim:
+			shift4prim(state[TOP][2][1], state[BACK][0][1], state[DOWN][2][1], state[FRONT][2][1]);
+			shift4prim(state[FRONT][0][1], state[TOP][0][1], state[BACK][2][1], state[DOWN][0][1]);
+			shift4prim(state[TOP][1][1], state[BACK][1][1], state[DOWN][1][1], state[FRONT][1][1]);
+			break;
+		case M2:
+			for (int i = 0; i < 2; i++) {
+				shift4(state[TOP][2][1], state[BACK][0][1], state[DOWN][2][1], state[FRONT][2][1]);
+				shift4(state[FRONT][0][1], state[TOP][0][1], state[BACK][2][1], state[DOWN][0][1]);
+				shift4(state[TOP][1][1], state[BACK][1][1], state[DOWN][1][1], state[FRONT][1][1]);
+			}
+			break;
+		case X:
+			int temp[3][3];
+			std::memcpy(temp, state[TOP], sizeof(temp));
+			std::memcpy(state[TOP], state[BACK], sizeof(temp));
+			std::memcpy(state[BACK], state[DOWN], sizeof(temp));
+			std::memcpy(state[DOWN], state[FRONT], sizeof(temp));
+			std::memcpy(state[FRONT], temp, sizeof(temp));
+			shift4(state[RIGHT][0][1], state[RIGHT][1][2], state[RIGHT][2][1], state[RIGHT][1][0]);
+			shift4(state[RIGHT][0][0], state[RIGHT][0][2], state[RIGHT][2][2], state[RIGHT][2][0]);
+			shift4(state[LEFT][0][1], state[LEFT][1][0], state[LEFT][2][1], state[LEFT][1][2]);
+			shift4(state[LEFT][0][0], state[LEFT][2][0], state[LEFT][2][2], state[LEFT][0][2]);
+			break;
+		case Xprim:
+			int temp[3][3];
+			std::memcpy(temp, state[TOP], sizeof(temp));
+			std::memcpy(state[TOP], state[FRONT], sizeof(temp));
+			std::memcpy(state[FRONT], state[DOWN], sizeof(temp));
+			std::memcpy(state[DOWN], state[BACK], sizeof(temp));
+			std::memcpy(state[BACK], temp, sizeof(temp));
+			shift4prim(state[RIGHT][0][1], state[RIGHT][1][2], state[RIGHT][2][1], state[RIGHT][1][0]);
+			shift4prim(state[RIGHT][0][0], state[RIGHT][0][2], state[RIGHT][2][2], state[RIGHT][2][0]);
+			shift4prim(state[LEFT][0][1], state[LEFT][1][0], state[LEFT][2][1], state[LEFT][1][2]);
+			shift4prim(state[LEFT][0][0], state[LEFT][2][0], state[LEFT][2][2], state[LEFT][0][2]);
+			break;
+		case X2:
+			for (int i = 0; i < 2; i++) {
+				int temp[3][3];
+				std::memcpy(temp, state[TOP], sizeof(temp));
+				std::memcpy(state[TOP], state[BACK], sizeof(temp));
+				std::memcpy(state[BACK], state[DOWN], sizeof(temp));
+				std::memcpy(state[DOWN], state[FRONT], sizeof(temp));
+				std::memcpy(state[FRONT], temp, sizeof(temp));
+				shift4(state[RIGHT][0][1], state[RIGHT][1][2], state[RIGHT][2][1], state[RIGHT][1][0]);
+				shift4(state[RIGHT][0][0], state[RIGHT][0][2], state[RIGHT][2][2], state[RIGHT][2][0]);
+				shift4(state[LEFT][0][1], state[LEFT][1][0], state[LEFT][2][1], state[LEFT][1][2]);
+				shift4(state[LEFT][0][0], state[LEFT][2][0], state[LEFT][2][2], state[LEFT][0][2]);
+			}
+			break;
 		}
 	}
 
