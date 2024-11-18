@@ -65,6 +65,24 @@ namespace Core {
 		d = temp;
 	}
 
+	void shiftRotate(int (&state)[6][3][3], int a, int b, int c, int d) {
+		int temp[3][3];
+		std::memcpy(temp, state[a], sizeof(temp));
+		std::memcpy(state[a], state[b], sizeof(temp));
+		std::memcpy(state[b], state[c], sizeof(temp));
+		std::memcpy(state[c], state[d], sizeof(temp));
+		std::memcpy(state[d], temp, sizeof(temp));
+	}
+
+	void shiftRotatePrim(int(&state)[6][3][3], int d, int c, int b, int a) {
+		int temp[3][3];
+		std::memcpy(temp, state[a], sizeof(temp));
+		std::memcpy(state[a], state[b], sizeof(temp));
+		std::memcpy(state[b], state[c], sizeof(temp));
+		std::memcpy(state[c], state[d], sizeof(temp));
+		std::memcpy(state[d], temp, sizeof(temp));
+	}
+
 	void Cube::MakeMove(int move, int(&state)[6][3][3]) {
 		switch (move) {
 		case U:
@@ -228,12 +246,13 @@ namespace Core {
 			}
 			break;
 		case X:
-			int temp[3][3];
-			std::memcpy(temp, state[TOP], sizeof(temp));
-			std::memcpy(state[TOP], state[BACK], sizeof(temp));
-			std::memcpy(state[BACK], state[DOWN], sizeof(temp));
-			std::memcpy(state[DOWN], state[FRONT], sizeof(temp));
-			std::memcpy(state[FRONT], temp, sizeof(temp));
+			//int temp[3][3];
+			//std::memcpy(temp, state[TOP], sizeof(temp));
+			//std::memcpy(state[TOP], state[BACK], sizeof(temp));
+			//std::memcpy(state[BACK], state[DOWN], sizeof(temp));
+			//std::memcpy(state[DOWN], state[FRONT], sizeof(temp));
+			//std::memcpy(state[FRONT], temp, sizeof(temp));
+			shiftRotate(state, TOP, BACK, DOWN, FRONT);
 			shift4(state[RIGHT][0][1], state[RIGHT][1][2], state[RIGHT][2][1], state[RIGHT][1][0]);
 			shift4(state[RIGHT][0][0], state[RIGHT][0][2], state[RIGHT][2][2], state[RIGHT][2][0]);
 			shift4(state[LEFT][0][1], state[LEFT][1][0], state[LEFT][2][1], state[LEFT][1][2]);
@@ -241,11 +260,12 @@ namespace Core {
 			break;
 		case Xprim:
 			int temp[3][3];
-			std::memcpy(temp, state[TOP], sizeof(temp));
-			std::memcpy(state[TOP], state[FRONT], sizeof(temp));
-			std::memcpy(state[FRONT], state[DOWN], sizeof(temp));
-			std::memcpy(state[DOWN], state[BACK], sizeof(temp));
-			std::memcpy(state[BACK], temp, sizeof(temp));
+			//std::memcpy(temp, state[TOP], sizeof(temp));
+			//std::memcpy(state[TOP], state[FRONT], sizeof(temp));
+			//std::memcpy(state[FRONT], state[DOWN], sizeof(temp));
+			//std::memcpy(state[DOWN], state[BACK], sizeof(temp));
+			//std::memcpy(state[BACK], temp, sizeof(temp));
+			shiftRotatePrim(state, TOP, BACK, DOWN, FRONT);
 			shift4prim(state[RIGHT][0][1], state[RIGHT][1][2], state[RIGHT][2][1], state[RIGHT][1][0]);
 			shift4prim(state[RIGHT][0][0], state[RIGHT][0][2], state[RIGHT][2][2], state[RIGHT][2][0]);
 			shift4prim(state[LEFT][0][1], state[LEFT][1][0], state[LEFT][2][1], state[LEFT][1][2]);
@@ -253,18 +273,68 @@ namespace Core {
 			break;
 		case X2:
 			for (int i = 0; i < 2; i++) {
-				int temp[3][3];
-				std::memcpy(temp, state[TOP], sizeof(temp));
-				std::memcpy(state[TOP], state[BACK], sizeof(temp));
-				std::memcpy(state[BACK], state[DOWN], sizeof(temp));
-				std::memcpy(state[DOWN], state[FRONT], sizeof(temp));
-				std::memcpy(state[FRONT], temp, sizeof(temp));
+				shiftRotate(state, TOP, BACK, DOWN, FRONT);
 				shift4(state[RIGHT][0][1], state[RIGHT][1][2], state[RIGHT][2][1], state[RIGHT][1][0]);
 				shift4(state[RIGHT][0][0], state[RIGHT][0][2], state[RIGHT][2][2], state[RIGHT][2][0]);
 				shift4(state[LEFT][0][1], state[LEFT][1][0], state[LEFT][2][1], state[LEFT][1][2]);
 				shift4(state[LEFT][0][0], state[LEFT][2][0], state[LEFT][2][2], state[LEFT][0][2]);
 			}
 			break;
+		case Y:
+			shiftRotate(state, FRONT, RIGHT, BACK, LEFT);
+			shift4(state[TOP][0][1], state[TOP][1][2], state[TOP][2][1], state[TOP][1][0]);
+			shift4(state[TOP][0][0], state[TOP][0][2], state[TOP][2][2], state[TOP][2][0]);
+			shift4(state[DOWN][0][1], state[DOWN][1][0], state[DOWN][2][1], state[DOWN][1][2]);
+			shift4(state[DOWN][0][0], state[DOWN][2][0], state[DOWN][2][2], state[DOWN][0][2]);
+			break;
+		case Yprim:
+			shiftRotatePrim(state, FRONT, RIGHT, BACK, LEFT);
+			shift4prim(state[TOP][0][1], state[TOP][1][2], state[TOP][2][1], state[TOP][1][0]);
+			shift4prim(state[TOP][0][0], state[TOP][0][2], state[TOP][2][2], state[TOP][2][0]);
+			shift4prim(state[DOWN][0][1], state[DOWN][1][0], state[DOWN][2][1], state[DOWN][1][2]);
+			shift4prim(state[DOWN][0][0], state[DOWN][2][0], state[DOWN][2][2], state[DOWN][0][2]);
+			break;
+		case Y2:
+			for (int i = 0; i < 2; i++) {
+				shiftRotate(state, FRONT, RIGHT, BACK, LEFT);
+				shift4(state[TOP][0][1], state[TOP][1][2], state[TOP][2][1], state[TOP][1][0]);
+				shift4(state[TOP][0][0], state[TOP][0][2], state[TOP][2][2], state[TOP][2][0]);
+				shift4(state[DOWN][0][1], state[DOWN][1][0], state[DOWN][2][1], state[DOWN][1][2]);
+				shift4(state[DOWN][0][0], state[DOWN][2][0], state[DOWN][2][2], state[DOWN][0][2]);
+			}
+			break;
+		case Z:
+			break; // nie wiem jak to zrobic zeby dzialalo (zle przechodzi TOP na RIGHT), ale jakims cudem inne funkcje dzialaja dobrze
+		}
+	}
+
+	bool Cube::CheckSolved(int(&state)[6][3][3]) {
+		for (int face = 0; face < 6; face++) {
+			int color = state[face][0][0];
+			for (int row = 0; row < 3; row++) {
+				for (int col = 0; col < 3; col++) {
+					if (state[face][row][col] != color) {
+						return false;
+					}
+				}
+			}
+		}
+		return true;
+	}
+
+	int Cube::GetMove() {
+		std::string move;
+		int moveVal;
+		std::cout << "Podaj ruch który chcesz wykonaæ (np. U lub Uprim)";
+		std::cin >> move;
+		auto it = moveMap.find(move);
+		if (it != moveMap.end()) {
+			int moveVal = static_cast<int>(it->second);
+			return moveVal;
+		}
+		else {
+			std::cout << "Nieprawid³owy ruch";
+			return -1;
 		}
 	}
 
