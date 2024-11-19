@@ -1,7 +1,26 @@
 #include "Core.h"
 #include <iostream>
+#include <string>
+#include <unordered_map>
+#include <vector>
+#include <sstream>	
+#include <cassert>
 
 namespace Core {
+	
+	std::unordered_map<std::string, move> moveMap = {
+		{"U", U}, {"Uprim", Uprim}, {"U2", U2},
+		{"R", R}, {"Rprim", Rprim}, {"R2", R2},
+		{"L", L}, {"Lprim", Lprim}, {"L2", L2},
+		{"F", F}, {"Fprim", Fprim}, {"F2", F2},
+		{"B", B}, {"Bprim", Bprim}, {"B2", B2},
+		{"D", D}, {"Dprim", Dprim}, {"D2", D2},
+		{"M", M}, {"Mprim", Mprim}, {"M2", M2},
+		{"X", X}, {"Xprim", Xprim}, {"X2", X2},
+		{"Y", Y}, {"Yprim", Yprim}, {"Y2", Y2},
+		{"Z", Z}, {"Zprim", Zprim}, {"Z2", Z2},
+		{"none", none}
+	};
 
 	Cube::Cube() {
 			for (int i = 0; i < 3; i++) {
@@ -140,14 +159,14 @@ namespace Core {
 			shift4(state[LEFT][0][1], state[LEFT][1][2], state[LEFT][2][1], state[LEFT][1][0]);
 			shift4(state[TOP][0][0], state[FRONT][0][0], state[DOWN][0][0], state[BACK][2][2]);
 			shift4(state[BACK][0][2], state[TOP][2][0], state[FRONT][2][0], state[DOWN][2][0]);
-			shift4(state[LEFT][0][0], state[LEFT][0][2], state[LEFT][2][2], state[LEFT][0][2]);
+			shift4(state[LEFT][0][0], state[LEFT][0][2], state[LEFT][2][2], state[LEFT][2][0]);
 			break;
 		case Lprim:
 			shift4prim(state[TOP][1][0], state[FRONT][1][0], state[DOWN][1][0], state[BACK][1][2]);
 			shift4prim(state[LEFT][0][1], state[LEFT][1][2], state[LEFT][2][1], state[LEFT][1][0]);
 			shift4prim(state[TOP][0][0], state[FRONT][0][0], state[DOWN][0][0], state[BACK][2][2]);
 			shift4prim(state[BACK][0][2], state[TOP][2][0], state[FRONT][2][0], state[DOWN][2][0]);
-			shift4prim(state[LEFT][0][0], state[LEFT][0][2], state[LEFT][2][2], state[LEFT][0][2]);
+			shift4prim(state[LEFT][0][0], state[LEFT][0][2], state[LEFT][2][2], state[LEFT][2][0]);
 			break;
 		case L2:
 			for (int i = 0; i < 2; i++) {
@@ -155,7 +174,7 @@ namespace Core {
 				shift4(state[LEFT][0][1], state[LEFT][1][2], state[LEFT][2][1], state[LEFT][1][0]);
 				shift4(state[TOP][0][0], state[FRONT][0][0], state[DOWN][0][0], state[BACK][2][2]);
 				shift4(state[BACK][0][2], state[TOP][2][0], state[FRONT][2][0], state[DOWN][2][0]);
-				shift4(state[LEFT][0][0], state[LEFT][0][2], state[LEFT][2][2], state[LEFT][0][2]);
+				shift4(state[LEFT][0][0], state[LEFT][0][2], state[LEFT][2][2], state[LEFT][2][0]);
 			}
 			break;
 		case F:
@@ -321,11 +340,10 @@ namespace Core {
 		}
 		return true;
 	}
-
+	//gdzies jest blad
 	int Cube::GetMove() {
 		std::string move;
-		int moveVal;
-		std::cout << "Podaj ruch który chcesz wykonaæ (np. U lub Uprim)";
+		std::cout << "Podaj ruch który chcesz wykonaæ (np. U lub U')  ";
 		std::cin >> move;
 		auto it = moveMap.find(move);
 		if (it != moveMap.end()) {
@@ -333,9 +351,27 @@ namespace Core {
 			return moveVal;
 		}
 		else {
-			std::cout << "Nieprawid³owy ruch";
+			std::cout << "Nieprawid³owy ruch\n";
 			return -1;
 		}
+	}
+	//gdzies jest blad
+	std::vector<int> Cube::ParseScramble(std::string& scramble) {
+		std::vector<int> ParsedScramble;
+		std::istringstream iss(scramble);
+		std::string moveStr;
+		while (iss >> moveStr) {
+			auto it = moveMap.find(moveStr);
+			if (it != moveMap.end()) {
+				int move = static_cast<int>(it->second);
+				ParsedScramble.emplace_back(move);
+			}
+			else {
+				std::cout << "Nieprawid³owy ruch: " << moveStr << "\n";
+				// Handle invalid move if necessary
+			}
+		}
+		return ParsedScramble;
 	}
 
 }
