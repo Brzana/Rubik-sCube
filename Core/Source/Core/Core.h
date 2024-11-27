@@ -37,6 +37,7 @@ namespace Core {
 		//test
 		void TestGetMove_ValidInput();
 		void TestGetMove_InvalidInput();
+		bool CheckEnum(const std::string& key, move& out, const std::unordered_map<std::string, move>& moveMap);
 	};
 
 }

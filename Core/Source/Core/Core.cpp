@@ -340,38 +340,52 @@ namespace Core {
 		}
 		return true;
 	}
+
+	bool Cube::CheckEnum(const std::string& key, move& out, const std::unordered_map<std::string, move>& moveMap) {
+		auto it = moveMap.find(key); 
+		if (it != moveMap.end()) {  
+			out = it->second;       
+			return true;            
+		}
+		return false;               
+	}
+
+
 	//gdzies jest blad
 	int Cube::GetMove() {
-		std::string move;
+		std::string moveString;
+		move out;
 		std::cout << "Podaj ruch który chcesz wykonaæ (np. U lub U')  ";
-		std::cin >> move;
-		auto it = moveMap.find(move);
-		if (it != moveMap.end()) {
-			int moveVal = static_cast<int>(it->second);
-			return moveVal;
+		std::cin >> moveString;
+
+		if (Cube::CheckEnum(moveString, out, moveMap)) {
+			return static_cast<int>(out);
 		}
 		else {
-			std::cout << "Nieprawid³owy ruch\n";
+			std::cout << "Nieprawid³owy ruch";
 			return -1;
 		}
 	}
+
+		
+	//}
 	//gdzies jest blad
-	std::vector<int> Cube::ParseScramble(std::string& scramble) {
-		std::vector<int> ParsedScramble;
-		std::istringstream iss(scramble);
-		std::string moveStr;
-		while (iss >> moveStr) {
-			auto it = moveMap.find(moveStr);
-			if (it != moveMap.end()) {
-				int move = static_cast<int>(it->second);
-				ParsedScramble.emplace_back(move);
-			}
-			else {
-				std::cout << "Nieprawid³owy ruch: " << moveStr << "\n";
+	//std::vector<int> Cube::ParseScramble(std::string& scramble) {
+		//std::vector<int> ParsedScramble;
+		//std::istringstream iss(scramble);
+		//std::string moveStr;
+		//while (iss >> moveStr) {
+			//auto it = moveMap.find(moveStr);
+			//if (it != moveMap.end()) {
+				//int move = static_cast<int>(it->second);
+				//ParsedScramble.emplace_back(move);
+			//}
+			//else {
+				//std::cout << "Nieprawid³owy ruch: " << moveStr << "\n";
 				// Handle invalid move if necessary
-			}
-		}
-		return ParsedScramble;
-	}
+			//}
+		//}
+		//return ParsedScramble;
+	//}
 
 }
